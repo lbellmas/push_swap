@@ -5,25 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/27 14:17:48 by lbellmas          #+#    #+#              #
-#    Updated: 2024/12/02 11:31:52 by lbellmas         ###   ########.fr        #
+#    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
+#    Updated: 2024/12/10 12:54:47 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
+NAME	= push_swap.a
 AR		=    ar
 ARFLAGS	=    -rcs
 CC		=    cc
-CFLAGS	=    -g -Wall -Wextra -Werror -MMD -MF $(@:.o=.d)
+CFLAGS	=    -g -Wall -Wextra -Werror
+OFLAGS	=	-MMD -MF $(@:.o=.d)
 
 SRCDIR	= src
 DEPSDIR = deps
 OBJDIR	= objs
-LIBFTDIR	= libft
-LIBFT	= $(LIBFTDIR)/libft.a
-SRCS	= ft_printf.c ft_printf_utils.c ft_printf_utils2.c ft_printf_bonus.c ft_printf_calculate.c ft_printf_calculate_falgs.c ft_printf_cases.c ft_printf_cases_bonus.c ft_printf_cases_bonus2.c ft_printf_malloc.c
+PRINTFDIR	= printf
+PRINTF	= $(PRINTFDIR)/libftprintf.a
+SRCS	= ft_status.c ft_base.c ft_push.c ft_swap.c
 OBJS	= $(addprefix $(OBJDIR)/, ${SRCS:.c=.o})
 DEPS	= $(addprefix $(DEPSDIR)/, ${SRCS:.c=.d})
+MAIN	= ft_push_swap.c
 
 RED         	= \033[0;31m
 GREEN       	= \033[0;32m
@@ -33,13 +35,14 @@ PURPLE      	= \033[0;35m
 CYAN        	= \033[0;36m
 RESET			= \033[m
 
-all: $(NAME) 
+all: $(NAME)
+	$(CC) -g -Wall -Wextra -Werror $(MAIN) $(NAME)
 
 -include $(DEPS)
 
 $(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.c | $(OBJDIR) $(DEPSDIR)
 	@printf "%-42b%b" "$(PURPLE)$(<):" "$(BLUE)$(@F)$(RESET)\n"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
 	@mv objs/*.d deps/
 
 $(OBJDIR):
@@ -48,28 +51,29 @@ $(OBJDIR):
 $(DEPSDIR):
 	@mkdir $(DEPSDIR)
 
-$(LIBFT):
+$(PRINTF):
 	@printf "%b" "$(BLUE)$(@F)$(RESET)\n"
-	@$(MAKE) --silent -C $(LIBFTDIR) bonus
+	@$(MAKE) --silent -C $(PRINTFDIR) 
 
-$(NAME): $(OBJS) $(LIBFT) 
+$(NAME): $(OBJS) $(PRINTF) 
 	@printf "%-42b%b" "$(PURPLE)$(<):" "$(BLUE)$(@F)$(RESET)\n"
-	@cp $(LIBFT) $(NAME)
+	@cp $(PRINTF) $(NAME)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean:
-	@printf "%b" "$(BLUE)printf $(@)ing...$(RESET)\n"
+	@printf "%b" "$(BLUE)push_swap $(@)ing...$(RESET)\n"
 	@rm -rf $(OBJDIR)
 	@rm -rf $(DEPSDIR)
-	@$(MAKE) -C $(LIBFTDIR) clean --silent
+	@$(MAKE) -C $(PRINTFDIR) clean --silent
 
 fclean: clean
-	@printf "%b" "$(BLUE)printf $(@)ing...$(RESET)\n"
+	@printf "%b" "$(BLUE)push_swap $(@)ing...$(RESET)\n"
+	@rm a.out
 	@rm -rf $(NAME)
-	@$(MAKE) -C $(LIBFTDIR) fclean --silent
+	@$(MAKE) -C $(PRINTFDIR) fclean --silent
 
 re: fclean all
 
 bonus: all
 
-.PHONY: all clean fclean re $(LIBFT)
+.PHONY: all clean fclean re $(PRINTF)
