@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:06:47 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/10 16:23:00 by lbellmas         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:06:19 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	a = ft_setup(argv);
+	ft_status(a, b);
+	//ft_swap_a(&a);
+	//ft_rev_rotate_a(&a);
+	ft_analisis_push(&a, &b);
 	ft_status(a, b);
 	ft_end_stack(&a, del);
 	return (0);
