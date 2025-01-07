@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:50:11 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/12 16:01:50 by lbellmas         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:12:02 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_rev_rotate_a(t_list **a)
 	while (last->next != *a)
 		last = last->next;
 	*a = last;
-	ft_printf("reverse rotate a\n");
+	ft_printf("rra\n");
 }
 
 void	ft_rev_rotate_b(t_list **b)
@@ -31,7 +31,7 @@ void	ft_rev_rotate_b(t_list **b)
 	while (last->next != *b)
 		last = last->next;
 	*b = last;
-	ft_printf("reverse rotate b\n");
+	ft_printf("rrb\n");
 }
 
 void	ft_rev_rotate_r(t_list **a, t_list **b)
@@ -46,5 +46,5 @@ void	ft_rev_rotate_r(t_list **a, t_list **b)
 	while (last->next != *b)
 		last = last->next;
 	*b = last;
-	ft_printf("reverse rotate r\n");
+	ft_printf("rrr\n");
 }

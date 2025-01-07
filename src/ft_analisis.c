@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/12 16:22:01 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:53:26 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_count_list(t_list *a)
 
 	temp = a;
 	count = 1;
+	if (!a)
+		return (0);
 	while (temp->next != a)
 	{
 		count++;
@@ -65,7 +67,103 @@ int	ft_find_small(t_list *a)
 	return (count);
 }
 
-void	ft_analisis_push(t_list **a, t_list **b)
+int	ft_find_big(t_list *a)
+{
+	t_list	*temp;
+	t_list	*big;
+	int	n_big;
+	int	count;
+
+	count = 1;
+	n_big = *(int *)a->content;
+	big = a;
+	temp = a->next;
+	while (temp != a)
+	{
+		if (n_big < *(int *)temp->content)
+		{
+			n_big = *(int *)temp->content;
+			big = temp;
+		}
+		temp = temp->next;
+	}
+	while (a != big)
+	{
+		count++;
+		a = a->next;
+	}
+	return (count);
+}
+
+int	ft_find_smaller(t_list *a, int n_push)
+{
+	t_list	*temp;
+	t_list	*smaller;
+	int	n_smaller;
+	int	count;
+
+	count = 1;
+	smaller = a;
+	temp = a->next;
+	while (n_push > *(int *)temp->content)
+	{
+		temp = temp->next;
+		if (temp == a)
+			return (0);
+	}
+	n_smaller = *(int *)temp->content;
+	while (temp != a)
+	{
+		if (n_smaller < *(int *)temp->content && *(int *)temp->content < n_push)
+		{
+			n_smaller = *(int *)temp->content;
+			smaller = temp;
+		}
+		temp = temp->next;
+	}
+	while (a != smaller)
+	{
+		count++;
+		a = a->next;
+	}
+	return (count);
+}
+
+int	ft_find_bigger(t_list *a, int n_push)
+{
+	t_list	*temp;
+	t_list	*bigger;
+	int	n_bigger;
+	int	count;
+
+	count = 1;
+	bigger = a;
+	temp = a->next;
+	while (n_push < *(int *)temp->content)
+	{
+		temp = temp->next;
+		if (temp == a)
+			return (0);
+	}
+	n_bigger = *(int *)temp->content;
+	while (temp != a)
+	{
+		if (n_bigger > *(int *)temp->content && *(int *)temp->content > n_push)
+		{
+			n_bigger = *(int *)temp->content;
+			bigger = temp;
+		}
+		temp = temp->next;
+	}
+	while (a != bigger)
+	{
+		count++;
+		a = a->next;
+	}
+	return (count);
+}
+
+void	ft_analisis_five(t_list **a, t_list **b)
 {
 	int	smallest;
 	int	n_list;
@@ -83,5 +181,19 @@ void	ft_analisis_push(t_list **a, t_list **b)
 
 		n_list = ft_count_list(*a);
 	}
-	ft_end_list(a, b); //si hay en stack b pushea todo, sino solo ordena stack a
+	ft_end_list(a, b);
+}
+
+void	ft_analisis_push(t_list **a, t_list **b)
+{
+	int	n_list;
+
+	n_list = ft_count_list(*a);
+	if (n_list <= 100)
+		ft_num_chunks(a, b, n_list, 5);
+	else if (n_list >= 500 )
+		ft_num_chunks(a, b, n_list, 11);
+	else
+		ft_num_chunks(a, b, n_list, 7);
+	return ;
 }
