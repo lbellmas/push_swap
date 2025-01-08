@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:11:34 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/07 15:37:52 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:43:46 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_chunk_calculate(t_list *a, int psmall, int n_list)
 	return (small);
 }
 
-int	ft_do_chunk(t_list **a, int chunk, int m_list)
+/*int	ft_do_chunk(t_list **a, int chunk, int m_list)
 {
 	t_list *temp;
 	int	p;
@@ -90,6 +90,36 @@ int	ft_do_chunk(t_list **a, int chunk, int m_list)
 		p++;
 	}
 	return (psave);
+}*/
+
+int	ft_do_chunk(t_list **a, int chunk, int m_list)
+{
+	t_list	*last;
+	t_list	*temp;
+	t_list	*first;
+	int	p;
+	int	plast;
+
+	p = 1;
+	first = *a;
+	last = (*a)->next;
+	while (last->next != *a)
+		last = last->next;
+	while (p <= m_list)
+	{
+		plast = ft_count_list(*a) - p + 1;
+		if (*(int *)first->content < chunk)
+			return (p);
+		else if (*(int *)last->content < chunk)
+			return (plast);
+		first = first->next;
+		temp = last;
+		last = *a;
+		p++;
+		while (last->next != temp)
+			last = last->next;
+	}
+	return (0);
 }
 
 void	ft_chunk(t_list **a, t_list **b, int chunk, int n_list)
@@ -148,7 +178,8 @@ void	ft_num_chunks(t_list **a, t_list **b, int n_list, int analisis)
 		ft_chunk(a, b, chunk, n_list);
 	//i = analisis - 1;
 	n_chunk = n_list / analisis;
-	ft_printf("chunk 1\n");
+	//ft_status(*a, *b);
+	//ft_printf("chunk 1\n");
 	while (analisis - 1)
 	{
 		i = 0;
@@ -162,10 +193,11 @@ void	ft_num_chunks(t_list **a, t_list **b, int n_list, int analisis)
 			i++;
 		}
 		analisis--;
-		ft_printf("chunk \n");
+		//ft_status(*a, *b);
+		//ft_printf("chunk \n");
 		//i--;
 	}
 	//*a = NULL;
-	ft_end_stackb(b, ft_find_small(*b));
+	//ft_end_stackb(b, ft_find_small(*b));
 	ft_push_all(a, b);
 }

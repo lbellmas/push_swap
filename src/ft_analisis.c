@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/07 12:53:26 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:05:28 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,16 @@ int	ft_find_smaller(t_list *a, int n_push)
 	int	count;
 
 	count = 1;
-	smaller = a;
-	temp = a->next;
-	while (n_push > *(int *)temp->content)
+	temp = a;
+	while (n_push < *(int *)temp->content)
 	{
 		temp = temp->next;
 		if (temp == a)
 			return (0);
 	}
+	smaller = temp;
 	n_smaller = *(int *)temp->content;
+	temp = temp->next;
 	while (temp != a)
 	{
 		if (n_smaller < *(int *)temp->content && *(int *)temp->content < n_push)
@@ -137,15 +138,16 @@ int	ft_find_bigger(t_list *a, int n_push)
 	int	count;
 
 	count = 1;
-	bigger = a;
-	temp = a->next;
-	while (n_push < *(int *)temp->content)
+	temp = a;
+	while (n_push > *(int *)temp->content)
 	{
 		temp = temp->next;
 		if (temp == a)
 			return (0);
 	}
+	bigger = temp;
 	n_bigger = *(int *)temp->content;
+	temp = temp->next;
 	while (temp != a)
 	{
 		if (n_bigger > *(int *)temp->content && *(int *)temp->content > n_push)

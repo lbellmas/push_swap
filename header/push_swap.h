@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:44 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/07 13:21:53 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:26:02 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_num_chunks(t_list **a, t_list **b, int n_list, int analisis);
 void	ft_top_num(t_list **b, int p_smallest);
 void	ft_min_num(t_list **b, int p_biggest);
 void	ft_mid_num(t_list **b, int p_bigger, int n_push);
+void	ft_check_bstack(int	n_push, t_list **b);
 
 
 #endif
