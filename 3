@@ -1,0 +1,367 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_numbers.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/11 15:51:53 by lbellmas          #+#    #+#             */
+/*   Updated: 2025/01/16 15:31:33 by lbellmas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header/push_swap.h"
+#include <limits.h>
+
+t_list	*ft_prev_tlist(t_list *last, t_list *list)
+{
+	while (list->next != last)
+		list = list->next;
+	return (list);
+}
+
+/*static t_list	*ft_find_nsmall(t_list *a, int n_max, int number)
+{
+	t_list	*temp;
+	t_list	*small;
+	int	n_small;
+	int	p;
+
+	p = 0;
+	n_small = *(int *)a->content;
+	small = a;
+	temp = a->next;
+	while (p < n_max)
+	{
+		if (n_small > *(int *)temp->content && *(int *)temp->content >= number)
+		{
+			n_small = *(int *)temp->content;
+			small = temp;
+		}
+		temp = temp->next;
+		p++;
+	}
+	return (small);
+}*/
+
+/*t_list	*ft_find_nsmall(t_list *list, int n_max, int number)
+{
+	t_list	*save;
+	t_list	*temp;
+	int	p;
+	int	last_save;
+	int	n_save;
+
+	p = 0;
+	temp = list;
+	save = temp;
+	last_save = INT_MIN;
+	while (number)
+	{
+		n_save = INT_MAX;
+		temp = list;
+		p = 0;
+		while (p < n_max)
+		{
+			if (*(int *)temp->content <= n_save && *(int *)temp->content > last_save)
+			{
+				n_save = *(int *)temp->content;
+				save = temp;
+			}
+			temp = temp->next;
+			p++;
+		}
+		last_save = *(int *)save->content;
+		number--;
+	}
+	return (save);
+}
+
+void	ft_numbers(t_list **list, int n_max)
+{
+	t_list *temp;
+	int	number;
+
+	number = 1;
+	while (number <= n_max)
+	{
+		temp = ft_find_nsmall(*list, n_max, number);
+		*(int *)(temp->content) = number;
+		number++;
+	}
+	return ;
+}*/
+
+// Copiar valores de la lista a un arreglo
+/*int *ft_copy_values(t_list *list, int n_max)
+{
+	int	values[n_max];
+    int i = 0;
+
+    while (list && i < n_max)
+    {
+        values[i++] = *(int *)(list->content);
+        list = list->next;
+    }
+    return values;
+}*/
+
+// Ordenar arreglo con Bubble Sort
+/*void ft_sort_values(int *values, int n_max)
+{
+    int swapped;
+    int temp;
+    int i = 0;
+
+    do {
+        swapped = 0;
+        i = 0;
+        while (i < n_max - 1)
+        {
+            if (values[i] > values[i + 1])
+            {
+                temp = values[i];
+                values[i] = values[i + 1];
+                values[i + 1] = temp;
+                swapped = 1;
+            }
+            i++;
+        }
+    } while (swapped);
+}*/
+
+/*void	ft_sort_int_tab(int *tab, int size)
+{
+	char	temp;
+	int		num1;
+	int		num2;
+
+	num1 = 0;
+	num2 = 1;
+	while (num1 < size)
+	{
+		if (tab[num1] > tab[num2])
+		{
+			temp = tab[num1];
+			tab[num1] = tab[num2];
+			tab[num2] = temp;
+			num1 = 0;
+			num2 = 1;
+		}
+		else
+		{
+			num1++;
+			num2++;
+		}
+	}
+}
+
+// Reasignar valores ordenados a la lista
+void ft_assign_values(t_list *list, int *values, int n_max)
+{
+	t_list	*temp;
+    int i = 0;
+
+    while (i < n_max)
+    {
+		temp = list;
+		while (*(int *)temp->content != values[i])
+			temp = temp->next;
+        *(int *)(temp->content) = i + 1; // Números del 1 al n_max
+        i++;
+    }
+}
+
+// Función principal
+void ft_numbers(t_list **list, int n_max)
+{
+	t_list	*temp;
+    int values[n_max];
+	int	i;
+	
+	i = 0;
+    if (!list || !*list || n_max <= 0)
+		return ;
+	temp = *list;
+    while (list && i < n_max)
+    {
+        values[i++] = *(int *)(temp->content);
+        temp = temp->next;
+    }
+    //values = ft_copy_values(*list, n_max);
+    ft_sort_int_tab(values, n_max);
+    ft_assign_values(*list, values, n_max);
+}*/
+
+#include <stdlib.h>
+#include <limits.h>
+
+void ft_sort_int_tab(int *tab, int size)
+{
+    int temp;
+    int num1;
+    int num2;
+
+    num1 = 0;
+    while (num1 < size)
+    {
+        num2 = 0;
+        while (num2 <= size)
+        {
+            if (tab[num1] > tab[num2])
+            {
+                temp = tab[num1];
+                tab[num1] = tab[num2];
+                tab[num2] = temp;
+            }
+            num2++;
+        }
+        num1++;
+    }
+}
+
+void ft_assign_values(t_list *list, int *values, int n_max)
+{
+    int i = 0;
+    t_list *temp;
+
+    while (i < n_max)
+    {
+        temp = list;
+        while (temp && (*(int *)temp->content != values[i]))
+            temp = temp->next;
+        if (temp)
+            *(int *)temp->content = i + 1; // Números del 1 al n_max
+        i++;
+    }
+}
+
+int	ft_is_sorted(int *values, int n_max)
+{
+	int	num1;
+	int	num2;
+	int i;
+
+	num1 = 0;
+	num2 = 1;
+	i = 0;
+	while (num1 < n_max)
+	{
+		if (values[num1] > values[num2])
+			return (0);
+		num1++;
+		num2++;
+	}
+	while (i < n_max)
+	{
+		ft_printf("%i", values[i]);
+		i++;
+	}
+	return (1);
+}
+
+void ft_numbers(t_list **list, int n_max)
+{
+    t_list *temp;
+    int *values;
+    int i = 0;
+
+    if (!list || !*list || n_max <= 0)
+        return;
+
+    values = malloc(sizeof(int) * n_max);
+    if (!values)
+        return;
+
+    temp = *list;
+    while (temp && i < n_max)
+    {
+        values[i++] = *(int *)(temp->content);
+        temp = temp->next;
+    }
+	//while (ft_is_sorted(values, n_max) == 0)
+    ft_sort_int_tab(values, n_max);
+	i = 0;
+	while (i < n_max)
+	{
+		ft_printf("%i", values[i]);
+		i++;
+	}
+	return (1);
+    ft_assign_values(*list, values, n_max);
+
+    free(values);
+}
+
+
+/*static t_list	*ft_find_rev_nsmall(t_list *a, int n_max, int number)
+{
+	t_list	*temp;
+	t_list	*small;
+	int	n_small;
+	int	p;
+
+	p = 0;
+	n_small = *(int *)a->content;
+	small = ft_last_list(a);
+	temp = ft_prev_tlist(small, a);
+	while (p < n_max)
+	{
+		if (n_small > *(int *)temp->content && *(int *)temp->content >= number)
+		{
+			n_small = *(int *)temp->content;
+			small = temp;
+		}
+		temp = ft_prev_tlist(temp, a);
+		p++;
+	}
+	return (small);
+}*/ 
+
+t_list	*ft_find_rev_nsmall(t_list *list, int n_max, int number)
+{
+	t_list	*save;
+	t_list	*temp;
+	int	p;
+	int	last_save;
+	int	n_save;
+
+	p = 0;
+	temp = list;
+	save = temp;
+	last_save = INT_MIN;
+	while (number)
+	{
+		n_save = INT_MAX;
+		temp = list;
+		p = 0;
+		while (p < n_max)
+		{
+			if (*(int *)temp->content <= n_save && *(int *)temp->content > last_save)
+			{
+				n_save = *(int *)temp->content;
+				save = temp;
+			}
+			temp = ft_prev_tlist(temp, list);
+			p++;
+		}
+		last_save = *(int *)save->content;
+		number--;
+	}
+	return (save);
+}
+
+void	ft_rev_numbers(t_list **list, int n_max)
+{
+	t_list *temp;
+	int	number;
+
+	number = 1;
+	while (number <= n_max)
+	{
+		temp = ft_find_rev_nsmall(*list, n_max, number);
+		*(int *)(temp->content) = number;
+		number++;
+	}
+	return ;
+}

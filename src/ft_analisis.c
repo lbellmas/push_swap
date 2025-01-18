@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/08 12:05:28 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:31:58 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,16 +186,356 @@ void	ft_analisis_five(t_list **a, t_list **b)
 	ft_end_list(a, b);
 }
 
+t_list	*ft_find_midchunk(t_list *c_analyze, t_chunk *new_chunk)
+{
+	t_list	*temp;
+
+	temp = c_analyze;
+	while (temp->next != c_analyze)
+	{
+		if (*(int *)temp->content <= (new_chunk->size_min + new_chunk->size_mid)
+				&& !(*(int *)temp->content <= new_chunk->size_min))
+			break ;
+		temp = temp->next;
+	}
+	return (temp);
+}
+
+int	ft_is_bot(t_list *check, t_list *list)
+{
+	if (ft_last_list(list) == check)
+		return (1);
+	return (0);
+}
+
+void	ft_share_min(t_list **c_analyze, t_list **c_split, t_list **a, int bot)
+{
+	if (*c_analyze == *a)
+	{
+		if (bot == 0)
+		{
+			ft_push_b(c_analyze, c_split);
+			ft_rotate_b(c_split);
+		}
+		else
+		{
+			ft_rev_rotate_a(c_analyze);
+			ft_push_b(c_analyze, c_split);
+			ft_rotate_b(c_split);
+		}
+	}
+	else
+	{
+		if (bot  == 0)
+			ft_rotate_b(c_analyze);
+		else
+			ft_rev_rotate_b(c_analyze);
+	}
+}
+
+void	ft_share_mid(t_list **c_analyze, t_list **c_split, t_list **a, int bot)
+{
+	if (*c_analyze == *a)
+	{
+		if (bot == 0)
+			ft_push_b(c_analyze, c_split);
+		else
+		{
+			ft_rev_rotate_a(c_analyze);
+			ft_push_b(c_analyze, c_split);
+		}
+	}
+	else
+	{
+		if (bot == 0)
+		{
+			ft_push_a(c_split, c_analyze);
+			ft_rotate_a(c_split);
+		}
+		else
+		{
+			ft_rev_rotate_b(c_analyze);
+			ft_push_a(c_split, c_analyze);
+			ft_rotate_a(c_split);
+		}
+	}
+}
+
+void	ft_share_max(t_list **c_analyze, t_list **c_split, t_list **a, int bot)
+{
+	if (*c_analyze == *a)
+	{
+		if (bot == 0)
+			ft_rotate_a(c_analyze);
+		else
+			ft_rev_rotate_a(c_analyze);
+	}
+	else
+	{
+		if (bot == 0)
+			ft_push_a(c_split, c_analyze);
+		else
+		{
+			ft_rev_rotate_b(c_analyze);
+			ft_push_a(c_split, c_analyze);
+		}
+	}
+}
+
+void	ft_share_split(t_chunk *new_chunk, t_list **c_analyze, t_list **c_split, t_list **a)
+{
+	int	value;
+	int	mid;
+	int	max;
+	int	p;
+
+	mid = 0;
+	p = 0;
+	max = 0;
+	ft_numbers(*c_analyze, new_chunk->division);
+	//ft_status(*c_split, *c_analyze);
+	while (p < new_chunk->division)
+	{
+		value = *(int *)(*c_analyze)->content;
+
+		if (value <= new_chunk->size_min)
+			ft_share_min(c_analyze, c_split, a, 0);
+		else if (value <= (new_chunk->size_min + new_chunk->size_mid))
+		{
+			if (mid == 0)
+				new_chunk->mid = *c_analyze;
+			ft_share_mid(c_analyze, c_split, a, 0);
+			mid++;
+		}
+		else
+		{
+			if (max == 0)
+				new_chunk->max = *c_analyze;
+			ft_share_max(c_analyze, c_split, a, 0);
+			max++;
+		}
+		p++;
+	}
+}
+
+void	ft_share_split_bot(t_chunk *new_chunk, t_list **c_analyze, t_list **c_split, t_list **a)
+{
+	int	value;
+	int	mid;
+	int	min;
+	int	max;
+	int	p;
+
+	min = 0;
+	mid = 0;
+	p = 0;
+	max = 0;
+	ft_rev_numbers(*c_analyze, new_chunk->division);
+	//ft_status(*c_split, *c_analyze);
+	while (p < new_chunk->division)
+	{
+		value = *(int *)(ft_last_list(*c_analyze))->content;
+
+		if (value <= new_chunk->size_min)
+		{
+			if (min == 0)
+				new_chunk->min = ft_last_list(*c_analyze);
+			ft_share_min(c_analyze, c_split, a, 1);
+			min++;
+		}
+		else if (value <= (new_chunk->size_min + new_chunk->size_mid))
+		{
+			if (mid == 0)
+				new_chunk->mid = ft_last_list(*c_analyze);
+			ft_share_mid(c_analyze, c_split, a, 1);
+			mid++;
+		}
+		else
+		{
+			if (max == 0)
+				new_chunk->max = ft_last_list(*c_analyze);
+			ft_share_max(c_analyze, c_split, a, 1);
+			max++;
+		}
+		p++;
+	}
+	//ft_status(*c_split, *c_analyze);
+	if (c_analyze == a)
+		new_chunk->min = ft_last_list(*c_split);
+}
+
+t_chunk	*ft_split_chunk_bot(int	n_chunk, t_list **c_analyze, t_list **c_split, t_list **a)
+{
+	t_chunk	*new_chunk;
+
+	new_chunk = (t_chunk *)malloc(sizeof(t_chunk));
+	if (!new_chunk)
+		return (NULL);
+	new_chunk->division = n_chunk;
+	new_chunk->size_min = n_chunk / 3;
+	if (n_chunk % 3 == 2)
+	{
+		new_chunk->size_max = (n_chunk / 3) + 1;
+		new_chunk->size_mid = (n_chunk / 3) + 1;
+	}
+	else if (n_chunk % 3 == 1)
+	{
+		new_chunk->size_mid = (n_chunk / 3);
+		new_chunk->size_max = (n_chunk / 3) + 1;
+	}
+	else
+	{
+		new_chunk->size_max = (n_chunk / 3);
+		new_chunk->size_mid = (n_chunk / 3);
+	}
+	//new_chunk->mid = ft_find_midchunk(*c_analyze, new_chunk);
+	ft_share_split_bot(new_chunk, c_analyze, c_split, a);
+	if (c_analyze != a)
+	{
+		new_chunk->mid = NULL;
+		new_chunk->mid = ft_last_list(*c_split);
+	}
+	return (new_chunk);
+}
+
+t_list	*ft_last_list(t_list *list)
+{
+	t_list	*temp;
+
+	temp = list;
+	while (temp->next != list)
+		temp = temp->next;
+	return (temp);
+}
+
+t_chunk	*ft_split_chunk(int	n_chunk, t_list **c_analyze, t_list **c_split, t_list **a)
+{
+	t_chunk	*new_chunk;
+
+	new_chunk = (t_chunk *)malloc(sizeof(t_chunk));
+	if (!new_chunk)
+		return (NULL);
+	new_chunk->division = n_chunk;
+	new_chunk->size_min = n_chunk / 3;
+	if (n_chunk % 3 == 2)
+	{
+		new_chunk->size_max = (n_chunk / 3) + 1;
+		new_chunk->size_mid = (n_chunk / 3) + 1;
+	}
+	else if (n_chunk % 3 == 1)
+	{
+		new_chunk->size_mid = (n_chunk / 3);
+		new_chunk->size_max = (n_chunk / 3) + 1;
+	}
+	else
+	{
+		new_chunk->size_max = (n_chunk / 3);
+		new_chunk->size_mid = (n_chunk / 3);
+	}
+	ft_share_split(new_chunk, c_analyze, c_split, a);
+	if (c_analyze != a)
+	{
+		new_chunk->mid = NULL;
+		new_chunk->mid = ft_last_list(*c_split);
+	}
+	if (c_analyze != a)
+		new_chunk->min = ft_last_list(*c_analyze);
+	else
+		new_chunk->min = ft_last_list(*c_split);
+	if (c_analyze == a)
+		new_chunk->max = ft_last_list(*c_analyze);
+	return (new_chunk);
+}
+
+int	ft_lonely(t_list *check, int size, t_list *list)
+{
+	int p;
+
+	p = 0;
+	while (p++ < size)
+		list = list->next;
+	if (check == list)
+		return (1);
+	return (0);
+}
+
+t_chunk	*ft_decide_chunk(int flag, t_list **a, t_list **b, t_chunk *chunk)
+{
+	if	(flag == 1)
+	{
+		if (ft_is_bot(chunk->min, *b) == 0 || ft_lonely(chunk->min, chunk->size_min, *b))
+			return (ft_split_chunk(chunk->size_min, b, a, a));
+		else
+			return (ft_split_chunk_bot(chunk->size_min, b, a, a));
+	}
+	else if (flag == 3)
+		if (ft_is_bot(chunk->max, *a) == 0 || ft_lonely(chunk->max, chunk->size_max, *a))
+			return (ft_split_chunk(chunk->size_max, a, b, a));
+		else
+			return (ft_split_chunk_bot(chunk->size_max, a, b, a));
+	else if (ft_mid_a(chunk->mid, *a) == 0)
+	{
+			if (ft_is_bot(chunk->mid, *b) == 0)
+				return (ft_split_chunk(chunk->size_mid, b, a, a));
+			else
+				return (ft_split_chunk_bot(chunk->size_mid, b, a, a));
+	}
+	else
+	{
+		if (ft_is_bot(chunk->mid, *a) == 0)
+				return (ft_split_chunk(chunk->size_mid, a, b, a));
+			else
+				return (ft_split_chunk_bot(chunk->size_mid, a, b, a));
+	}
+}
+
+int	ft_check_max(t_list *a, t_list *max)
+{
+	int	p;
+
+	p = 0;
+	while (p < 4)
+	{
+		if (a == max)
+			return (1);
+		a = a->next;
+		p++;
+	}
+	return (0);
+}
+
+void	ft_rem_chunk(t_chunk **chunk)
+{
+	(*chunk)->size_min = 0;
+	(*chunk)->size_max = 0;
+	(*chunk)->size_mid = 0;
+	(*chunk)->max = NULL;
+	(*chunk)->mid = NULL;
+	(*chunk)->min = NULL;
+	free (*chunk);
+}
+
+void	ft_recursive_chunk_sort(t_chunk *chunk, t_list **a, t_list **b, int flag)
+{
+	t_chunk	*new;
+
+	if (chunk->size_min < 5)
+	{
+		ft_small_sort(chunk, a, b, flag);
+		return ;
+	}
+	new = ft_decide_chunk(flag, a, b, chunk);
+	ft_recursive_chunk_sort(new, a, b, 3);
+	ft_recursive_chunk_sort(new, a, b, 2);
+	ft_recursive_chunk_sort(new, a, b, 1);
+}
+
 void	ft_analisis_push(t_list **a, t_list **b)
 {
-	int	n_list;
-
-	n_list = ft_count_list(*a);
-	if (n_list <= 100)
-		ft_num_chunks(a, b, n_list, 5);
-	else if (n_list >= 500 )
-		ft_num_chunks(a, b, n_list, 11);
-	else
-		ft_num_chunks(a, b, n_list, 7);
+	t_chunk	*cien;
+	cien = ft_split_chunk(ft_count_list(*a), a, b, a);
+	ft_recursive_chunk_sort(cien, a, b, 3);
+	ft_recursive_chunk_sort(cien, a, b, 2);
+	ft_recursive_chunk_sort(cien, a, b, 1);
 	return ;
 }

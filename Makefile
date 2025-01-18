@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2024/12/17 16:19:07 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/11 18:54:46 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DEPSDIR = deps
 OBJDIR	= objs
 PRINTFDIR	= printf
 PRINTF	= $(PRINTFDIR)/libftprintf.a
-SRCS	= ft_status.c ft_base.c ft_push.c ft_swap.c ft_rotate.c ft_rev_rotate.c ft_analisis.c ft_move.c ft_push_error.c ft_chunks.c
+SRCS	= ft_status.c ft_base.c ft_push.c ft_swap.c ft_rotate.c ft_rev_rotate.c ft_analisis.c ft_move.c ft_push_error.c ft_chunks.c ft_numbers.c ft_sorts.c ft_sorts_mid.c ft_sorts_min.c
 OBJS	= $(addprefix $(OBJDIR)/, ${SRCS:.c=.o})
 DEPS	= $(addprefix $(DEPSDIR)/, ${SRCS:.c=.d})
 MAIN	= ft_push_swap.c
