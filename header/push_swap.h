@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:44 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/18 16:05:17 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:06:39 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,25 @@ void	ft_sort_top_a(t_list **a, t_list **b, int size);
 int	ft_prev_list(t_list *last, t_list *list);
 void	ft_sort_bot_a(t_list **a, t_list **b, t_chunk *chunk);
 void	ft_sort_max(t_list **a, t_list **b, t_chunk *chunk);
-void	ft_sort_mid(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_mid_bot(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_bot_a_two(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_min_2(t_list **b, t_list **a, t_chunk *chunk);
 void	ft_sort_min(t_list **b, t_list **a, t_chunk *chunk);
-int	ft_mid_a(t_list *mid, t_list *a);
+void	ft_sort_mid_two(t_list **a, t_list **b);
+void	ft_sort_mid_three(t_list **a, t_list **b);
+void	ft_sort_mid(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_max(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_max_top(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_max_bot(t_list **a, t_list **b, t_chunk *chunk);
 int	ft_is_bot(t_list *check, t_list *list);
 void	ft_sort_bot_a_mid(t_list **a, t_list **b, t_chunk *chunk);
+int	ft_mid_a(t_list *mid, t_list *a);
+void	ft_min_is_top(t_list **a, t_list **b, t_chunk *chunk);
+void	ft_sort_three_top(t_list **a);
+int	ft_lonely(t_list *check, int size, t_list *list);
+t_list	*ft_prev(t_list *last, t_list *list);
+int	ft_is_revsorted_rev(t_list *list, int size);
+int	ft_is_revsorted(t_list *list, int size);
+int	ft_is_sorted(t_list *list, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:51:53 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/17 10:57:42 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:24:48 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void ft_numbers(t_list *a, int size)
 	i = 0;
     current_order = 1;
     min_processed = -2147483648;
-	//ft_status(a, NULL);
     while (current_order <= size)
     {
 		i = 0;
