@@ -6,11 +6,33 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:26 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/21 12:22:43 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:53:11 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
+
+int	ft_is_sorted_rev(t_list *list, int size)
+{
+	int p;
+	t_list	*temp;
+	t_list	*prev;
+	p = 0;
+
+	if (ft_count_list(list) < 3)
+		return (0);
+	temp =ft_last_list(list);
+	prev = ft_prev(temp, list);
+	while (p < size && (temp != list))
+	{
+		if (*(int *)prev->content > *(int *)temp->content)
+			return (0);
+		temp = ft_prev(temp, list);
+		prev = ft_prev(prev, list);
+		p++;
+	}
+	return (1);
+}
 
 static void	ft_sort_max_bottom_four(t_list **a, t_list **b)
 {
@@ -71,9 +93,21 @@ static	void	ft_sort_four_max_a(t_list **a, t_list **b)
 	ft_check_swap(a, NULL);
 }
 
+void	ft_is_sorted_max_bot(t_list **a, int size)
+{
+	ft_rev_rotate_a(a);
+	ft_rev_rotate_a(a);
+	if (size > 2)
+		ft_rev_rotate_a(a);
+	if (size > 3)
+		ft_rev_rotate_a(a);
+}
+
 void	ft_sort_max_bot(t_list **a, t_list **b, t_chunk *chunk)
 {
-	if (chunk->size_max == 2)
+	if (ft_is_sorted_rev(*a, chunk->size_max) == 1)
+		ft_is_sorted_max_bot(a, chunk->size_max);
+	else if (chunk->size_max == 2)
 	{
 		ft_rev_rotate_a(a);
 		ft_rev_rotate_a(a);

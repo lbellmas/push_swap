@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:22:16 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/22 11:41:34 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:19:36 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	ft_is_sorted(t_list *list, int size)
 	t_list	*temp;
 	t_list	*prev;
 	p = 0;
+
 	if (ft_count_list(list) < 3)
 		return (0);
 	temp = list->next;
 	prev = list;
-	while (p < size && temp != list)
+	while (p < size && (temp != list))
 	{
-		if (*(int *)temp < *(int *)prev)
+		if (*(int *)prev->content > *(int *)temp->content)
 			return (0);
 		temp = temp->next;
 		prev = prev->next;
@@ -58,7 +59,6 @@ static void	ft_lonely_sort_max_four(t_list **a, t_list **b)
 {
 	if (*(int *)(*a)->next->next->next->content == 4)
 		ft_sort_three_top(a);
-
 	else if ((*(int *)(*a)->content == 1 && *(int *)(*a)->next->content == 2) || 
 			(*(int *)(*a)->content == 2 && *(int *)(*a)->next->content == 1))
 	{
@@ -82,29 +82,30 @@ static void	ft_lonely_sort_max_four(t_list **a, t_list **b)
 		ft_lonely_max_sort_four_ft_push_art2(a, b);
 }
 
-static void ft_lonely_max_sort(t_list **a, t_list **b, t_chunk *chunk)
+static void ft_lonely_max_sort(t_list **a, t_list **b, int size)
 {
-	int	biggest;
-	t_list	*last;
-	t_list	*temp;
+	int	check;
+	int	smallest;
 
-	temp = *a;
-	biggest = ft_find_big(*a);
-	last = ft_last_list(*a);
-	if (chunk->size_max == 3)
-	{
-		if (ft_is_sorted(*a, chunk->size_max))
-			return ;
-		if (*(int *)temp->content == biggest)
-			ft_rotate_a(a);
-		else if (*(int *)(*a)->next->content == biggest)
-			ft_rev_rotate_a(a);
-		if (*(int *)(*a)->content > *(int *)(*a)->next->content)
-			ft_swap_a(a);
-		return ;
-	}
-	else
+	check = 0;
+	if (size == 4)
 		ft_lonely_sort_max_four(a, b);
+	while (check != 2)
+	{
+		check = 0;
+		smallest = ft_find_small(*a);
+		if (smallest == 3)
+			ft_rev_rotate_a(a);
+		else if (smallest == 2)
+			ft_swap_a(a);
+		else
+			check++;
+		if ((*a)->next->next != *a &&
+				*(int *)((*a)->next->content) > *(int *)((*a)->next->next->content))
+			ft_rev_rotate_a(a);
+		else
+			check++;
+	}
 }
 
 void ft_sort_three_top(t_list **a)
@@ -171,7 +172,7 @@ void	ft_sort_max_top(t_list **a, t_list **b, t_chunk *chunk)
 	}
 	if (ft_lonely(chunk->max, chunk->size_max, *a) == 1)
 	{
-		ft_lonely_max_sort(a, b, chunk);
+		ft_lonely_max_sort(a, b, chunk->size_max);
 		return ;
 	}
 	else

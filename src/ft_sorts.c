@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:49:45 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/21 12:54:05 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:08:02 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_small_sort(t_chunk *chunk, t_list **a, t_list **b, int flag)
 		else  if (flag == 2)
 		{
 			if (chunk->size_mid == 1)
-				ft_push_b(a, b);
+				ft_push_a(a, b);
 			else
 			{
 				ft_numbers(*b, chunk->size_mid);
@@ -49,7 +49,7 @@ void	ft_small_sort(t_chunk *chunk, t_list **a, t_list **b, int flag)
 			if (chunk->size_min == 1)
 			{
 				ft_rev_rotate_b(b);
-				ft_push_b(a, b);
+				ft_push_a(a, b);
 				return ;
 			}
 			ft_sort_min(b, a, chunk);
@@ -72,11 +72,11 @@ void	ft_small_sort(t_chunk *chunk, t_list **a, t_list **b, int flag)
 		else
 		{
 			if (chunk->size_min == 1 && chunk->min == *b)
-				ft_push_b(a, b);
+				ft_push_a(a, b);
 			else if (chunk->size_min == 1)
 			{
 				ft_rev_rotate_b(b);
-				ft_push_b(a, b);
+				ft_push_a(a, b);
 			}
 			else
 				ft_sort_min(b, a, chunk);

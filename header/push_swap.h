@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:44 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/21 16:06:39 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:34:11 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ t_list	*ft_prev(t_list *last, t_list *list);
 int	ft_is_revsorted_rev(t_list *list, int size);
 int	ft_is_revsorted(t_list *list, int size);
 int	ft_is_sorted(t_list *list, int size);
+void	ft_sort_mid_min(t_list **a, t_list **b, t_chunk *chunk);
+int	ft_is_sorted_rev(t_list *list, int size);
 
 #endif
