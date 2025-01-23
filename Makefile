@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/23 16:26:23 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/23 20:14:57 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= push_swap.a
 AR		=    ar
 ARFLAGS	=    -rcs
 CC		=    cc
-CFLAGS	=    -g -Wall -Wextra -Werror
+CFLAGS	=   -Wall -Wextra -Werror -fsanitize=address
 OFLAGS	=	-MMD -MF $(@:.o=.d)
 
 SRCDIR	= src

@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/22 11:28:43 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:13:55 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,6 +558,7 @@ void	ft_recursive_chunk_sort(t_chunk *chunk, t_list **a, t_list **b, int flag)
 	ft_recursive_chunk_sort(new, a, b, 3);
 	ft_recursive_chunk_sort(new, a, b, 2);
 	ft_recursive_chunk_sort(new, a, b, 1);
+	ft_rem_chunk(&new);
 }
 
 void	ft_analisis_push(t_list **a, t_list **b)
@@ -567,5 +568,6 @@ void	ft_analisis_push(t_list **a, t_list **b)
 	ft_recursive_chunk_sort(cien, a, b, 3);
 	ft_recursive_chunk_sort(cien, a, b, 2);
 	ft_recursive_chunk_sort(cien, a, b, 1);
+	ft_rem_chunk(&cien);
 	return ;
 }
