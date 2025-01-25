@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/23 20:13:55 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/25 20:22:29 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_find_small(t_list *a)
 	return (count);
 }
 
-int	ft_find_big(t_list *a)
+/*int	ft_find_big(t_list *a)
 {
 	t_list	*temp;
 	t_list	*big;
@@ -93,9 +93,9 @@ int	ft_find_big(t_list *a)
 		a = a->next;
 	}
 	return (count);
-}
+}*/
 
-int	ft_find_smaller(t_list *a, int n_push)
+/*int	ft_find_smaller(t_list *a, int n_push)
 {
 	t_list	*temp;
 	t_list	*smaller;
@@ -128,9 +128,9 @@ int	ft_find_smaller(t_list *a, int n_push)
 		a = a->next;
 	}
 	return (count);
-}
+}*/
 
-int	ft_find_bigger(t_list *a, int n_push)
+/*int	ft_find_bigger(t_list *a, int n_push)
 {
 	t_list	*temp;
 	t_list	*bigger;
@@ -163,7 +163,7 @@ int	ft_find_bigger(t_list *a, int n_push)
 		a = a->next;
 	}
 	return (count);
-}
+}*/
 
 void	ft_analisis_five(t_list **a, t_list **b)
 {
@@ -186,7 +186,7 @@ void	ft_analisis_five(t_list **a, t_list **b)
 	ft_end_list(a, b);
 }
 
-t_list	*ft_find_midchunk(t_list *c_analyze, t_chunk *new_chunk)
+/*t_list	*ft_find_midchunk(t_list *c_analyze, t_chunk *new_chunk)
 {
 	t_list	*temp;
 
@@ -199,7 +199,7 @@ t_list	*ft_find_midchunk(t_list *c_analyze, t_chunk *new_chunk)
 		temp = temp->next;
 	}
 	return (temp);
-}
+}*/
 
 int	ft_is_bot(t_list *check, t_list *list)
 {
@@ -282,7 +282,7 @@ void	ft_share_max(t_list **c_analyze, t_list **c_split, t_list **a, int bot)
 	}
 }
 
-/*static int	ft_rr_min(t_list **c_analyze, t_list **c_split, int max, t_chunk *chunk)
+static int	ft_rr_min(t_list **c_analyze, t_list **c_split, int max, t_chunk *chunk)
 {
 	ft_push_b(c_analyze, c_split);
 	if (max == 0)
@@ -295,7 +295,7 @@ static void	ft_rr_mid(t_list **c_analyze, t_list **c_split)
 {
 	ft_push_a(c_split, c_analyze);
 	ft_rotate_r(c_split, c_analyze);
-}*/
+}
 
 void	ft_share_split(t_chunk *new_chunk, t_list **c_analyze, t_list **c_split, t_list **a)
 {
@@ -311,24 +311,24 @@ void	ft_share_split(t_chunk *new_chunk, t_list **c_analyze, t_list **c_split, t_
 	{
 		if (*(int *)(*c_analyze)->content <= new_chunk->size_min)
 		{
-			/*if (((p + 1) < new_chunk->division) && c_analyze == a && *(int *)(*c_analyze)->next->content > (new_chunk->size_min + new_chunk->size_mid))
+			if (((p + 1) < new_chunk->division) && c_analyze == a && *(int *)(*c_analyze)->next->content > (new_chunk->size_min + new_chunk->size_mid))
 			{
 				p++;
 				max += ft_rr_min(c_analyze, c_split, max, new_chunk);
 			}
-			else*/
+			else
 			ft_share_min(c_analyze, c_split, a, 0);
 		}
 		else if (*(int *)(*c_analyze)->content <= (new_chunk->size_min + new_chunk->size_mid))
 		{
 			if (mid == 0)
 				new_chunk->mid = *c_analyze;
-			/*if (((p + 1) < new_chunk->division) && c_analyze != a && *(int *)(*c_analyze)->next->content <= new_chunk->size_min)
+			if (((p + 1) < new_chunk->division) && c_analyze != a && *(int *)(*c_analyze)->next->content <= new_chunk->size_min)
 			{
 				p++;
 				ft_rr_mid(c_analyze, c_split);
 			}
-			else*/
+			else
 			ft_share_mid(c_analyze, c_split, a, 0);
 			mid++;
 		}

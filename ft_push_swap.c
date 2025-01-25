@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:06:47 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/16 16:19:16 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:50:47 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ int	main(int argc, char **argv)
 	}
 	a = ft_setup(argv);
 	ft_numbers(a, ft_count_list(a));
-	//ft_status(a, b);
 	if (ft_count_list(a) > 5)
 		ft_analisis_push(&a, &b);
 	else
 		ft_analisis_five(&a, &b);
-	//ft_status(a, b);
 	ft_end_stack(&a, del);
 	return (0);
 }
