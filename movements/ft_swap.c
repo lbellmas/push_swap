@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:34:51 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/16 12:13:04 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:53:26 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_swap_a(t_list **a)
 {
 	t_list	*last;
 	t_list	*second;
-	if (*a == NULL || (*a)->next == *a)
+
+	if ((*a) == NULL || (*a)->next == *a)
 		return ;
 	second = (*a)->next;
 	last = *a;
@@ -33,6 +34,7 @@ void	ft_swap_b(t_list **b)
 {
 	t_list	*last;
 	t_list	*second;
+
 	if (*b == NULL || (*b)->next == *b)
 		return ;
 	second = (*b)->next;
@@ -50,6 +52,7 @@ void	ft_swap_s(t_list **a, t_list **b)
 {
 	t_list	*last;
 	t_list	*second;
+
 	if ((*b == NULL || (*b)->next == *b) || (*a == NULL || (*a)->next == *b))
 		return ;
 	second = (*b)->next;

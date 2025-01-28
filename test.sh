@@ -12,8 +12,8 @@ INTENTOS=0
 while true; do
     rm -f test.txt checker.txt
     ARG=$(shuf -i 1-$RANGO -n $RANGO | tr '\n' ' ') 
-    ./a.out $ARG > test.txt
-    ./a.out $ARG | ./checker $ARG > checker.txt
+    ./push_swap $ARG > test.txt
+    ./push_swap $ARG | ./checker $ARG > checker.txt
 
     VAR=$(wc -l < test.txt)
     SUMA=$((SUMA + VAR))

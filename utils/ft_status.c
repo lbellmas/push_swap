@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:18:44 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/10 16:14:44 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:04:19 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_status(t_list *a, t_list *b)
 {
-	int	check;
-	t_list *tempa;
-	t_list *tempb;
+	int		check;
+	t_list	*tempa;
+	t_list	*tempb;
 
 	tempa = a;
 	tempb = b;

@@ -6,55 +6,36 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:53:03 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/23 16:28:15 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:40:20 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
 
-int	ft_is_revsorted(t_list *list, int size)
+static void	ft_sort_min_4_extension(t_list **a, t_list **b)
 {
-	int	p;
-	p = 0;
-	t_list	*temp;
-	t_list	*prev;
-	if (ft_count_list(list) < 3)
-		return (0);
-	temp = list->next;
-	prev = list;
-	while (p < size && temp)
+	ft_push_a(a, b);
+	ft_rev_rotate_b(b);
+	if (*(int *)(*b)->content == 4)
 	{
-		if (*(int *)temp->content > *(int *)prev->content)
-			return (0);
-		temp = temp->next;
-		prev = prev->next;
-		p++;
+		ft_push_a(a, b);
+		ft_rev_rotate_b(b);
+		ft_check_swap(a, b);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
 	}
-	return (1);
-}
-
-static	int ft_min_on_top(t_list **b, t_chunk *chunk)
-{
-	int	i;
-	int	res;
-	t_list	*head;
-
-	i = 0;
-	res = 0;
-	head = *b;
-	while (chunk->size_min >= i)
+	else
 	{
-		if (chunk->min == head)
-		{
-			res = 1;
-			break ;
-		}
-		i++;
-		if (!(head->next))
-			break;
-		head = head->next;
+		ft_rev_rotate_b(b);
+		ft_push_a(a, b);
+		ft_check_swap(a, b);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
 	}
-	return (res);
 }
 
 static void	ft_sort_min_4(t_list **b, t_list **a)
@@ -74,53 +55,10 @@ static void	ft_sort_min_4(t_list **b, t_list **a)
 		ft_check_swap(a, NULL);
 	}
 	else
-	{
-		ft_push_a(a, b);
-		ft_rev_rotate_b(b);
-		if (*(int *)(*b)->content == 4)
-		{
-			ft_push_a(a, b);
-			ft_rev_rotate_b(b);
-			ft_check_swap(a, b);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-		}
-		else
-		{
-			ft_rev_rotate_b(b);
-			ft_push_a(a, b);
-			ft_check_swap(a, b);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-		}
-
-	}
+		ft_sort_min_4_extension(a, b);
 }
 
-void	ft_sort_min_2(t_list **b, t_list **a, t_chunk *chunk)
-{
-	if (ft_min_on_top(b, chunk) == 0)
-		ft_rev_rotate_b(b);
-	if (*(int *)(*b)->content == 1)
-	{
-		ft_rev_rotate_b(b);
-		ft_push_a(a, b);
-		ft_push_a(a, b);
-		return ;
-	}
-	else
-	{
-		ft_push_a(a, b);
-		ft_rev_rotate_b(b);
-		ft_push_a(a, b);
-	}
-}
-
-void	ft_sorted_bot_min(t_list **a,t_list **b, int size)
+void	ft_sorted_bot_min(t_list **a, t_list **b, int size)
 {
 	ft_rev_rotate_b(b);
 	if (size == 2)
@@ -137,7 +75,7 @@ void	ft_sorted_bot_min(t_list **a,t_list **b, int size)
 		ft_push_a(a, b);
 		ft_push_a(a, b);
 	}
-	else if(size == 4)
+	else if (size == 4)
 	{
 		ft_rev_rotate_b(b);
 		ft_rev_rotate_b(b);
@@ -146,6 +84,35 @@ void	ft_sorted_bot_min(t_list **a,t_list **b, int size)
 		ft_push_a(a, b);
 		ft_push_a(a, b);
 		ft_push_a(a, b);
+	}
+}
+
+static void	ft_sort_min_extension(t_list **a, t_list **b)
+{
+	ft_rev_rotate_b(b);
+	if (*(int *)(*b)->content == 3)
+	{
+		ft_push_a(a, b);
+		ft_rev_rotate_b(b);
+		ft_push_a(a, b);
+		ft_rev_rotate_b(b);
+		ft_push_a(a, b);
+		return (ft_check_swap(a, NULL));
+	}
+	ft_rev_rotate_b(b);
+	if (*(int *)(*b)->content == 3)
+	{
+		ft_push_a(a, b);
+		ft_rev_rotate_b(b);
+		ft_check_swap(NULL, b);
+		return (ft_push_a(a, b), ft_push_a(a, b));
+	}
+	else if (*(int *)(*b)->content != 3)
+	{
+		ft_rev_rotate_b(b);
+		ft_push_a(a, b);
+		ft_check_swap(NULL, b);
+		return (ft_push_a(a, b), ft_push_a(a, b));
 	}
 }
 
@@ -164,36 +131,7 @@ void	ft_sort_min(t_list **b, t_list **a, t_chunk *chunk)
 		return ;
 	}
 	else if (chunk->size_min == 3)
-	{
-		ft_rev_rotate_b(b);
-		if (*(int *)(*b)->content == 3)
-		{
-			ft_push_a(a, b);
-			ft_rev_rotate_b(b);
-			ft_push_a(a, b);
-			ft_rev_rotate_b(b);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-			return ;
-		}
-		ft_rev_rotate_b(b);
-		if (*(int *)(*b)->content == 3)
-		{
-			ft_push_a(a, b);
-			ft_rev_rotate_b(b);
-			ft_check_swap(NULL, b);
-			ft_push_a(a, b);
-			ft_push_a(a, b);
-		}
-		else if (*(int *)(*b)->content != 3)
-		{
-			ft_rev_rotate_b(b);
-			ft_push_a(a, b);
-			ft_check_swap(NULL, b);
-			ft_push_a(a, b);
-			ft_push_a(a, b);
-		}
-	}
+		ft_sort_min_extension(a, b);
 	else
 		ft_sort_min_2(b, a, chunk);
 }

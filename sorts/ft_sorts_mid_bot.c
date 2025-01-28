@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:56:02 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/23 19:47:05 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:21:51 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_sort_mid_bottom_four(t_list **a, t_list **b)
 	ft_check_swap(a, NULL);
 }
 
-static void	ft_sort_bottom_three_mid(t_list **a, t_list **b, t_chunk *chunk)
+static void	ft_sort_bottom_three_mids(t_list **a, t_list **b, t_chunk *chunk)
 {
 	if (*(int *)chunk->mid->content == 3)
 	{
@@ -63,6 +63,27 @@ static void	ft_sort_bottom_three_mid(t_list **a, t_list **b, t_chunk *chunk)
 	}
 }
 
+static void	ft_sort_mid_bot_extension(t_list **a, t_list **b, t_chunk *chunk)
+{
+	if (ft_prev_list(ft_prev(chunk->mid, *a), *a) == 4
+		|| ft_prev_list(ft_prev(ft_prev(chunk->mid, *a), *a), *a) == 4)
+	{
+		ft_rev_rotate_a(a);
+		ft_rev_rotate_a(a);
+		ft_push_b(a, b);
+		ft_push_b(a, b);
+		ft_rev_rotate_a(a);
+		ft_rev_rotate_a(a);
+		ft_check_swap(a, b);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
+		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
+	}
+	else
+		ft_sort_mid_bottom_four(a, b);
+}
+
 void	ft_sort_mid_bot(t_list **a, t_list **b, t_chunk *chunk)
 {
 	if (ft_is_bot(chunk->min, *b) == 1)
@@ -74,24 +95,7 @@ void	ft_sort_mid_bot(t_list **a, t_list **b, t_chunk *chunk)
 		ft_check_swap(a, NULL);
 	}
 	else if (chunk->size_mid == 3)
-		ft_sort_bottom_three_mid(a, b, chunk);
+		ft_sort_bottom_three_mids(a, b, chunk);
 	else
-	{
-		if (ft_prev_list(ft_prev(chunk->mid, *a), *a) == 4 || ft_prev_list(ft_prev(ft_prev(chunk->mid, *a), *a), *a) == 4)
-		{
-			ft_rev_rotate_a(a);
-			ft_rev_rotate_a(a);
-			ft_push_b(a, b);
-			ft_push_b(a, b);
-			ft_rev_rotate_a(a);
-			ft_rev_rotate_a(a);
-			ft_check_swap(a, b);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-			ft_push_a(a, b);
-			ft_check_swap(a, NULL);
-		}
-		else
-			ft_sort_mid_bottom_four(a, b);
-	}
+		ft_sort_mid_bot_extension(a, b, chunk);
 }

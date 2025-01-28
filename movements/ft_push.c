@@ -6,13 +6,13 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:42:21 by lbellmas          #+#    #+#             */
-/*   Updated: 2024/12/16 12:11:14 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:29:48 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
 
-void	ft_last_push(t_list **add, t_list **rem)
+static void	ft_last_push(t_list **add, t_list **rem)
 {
 	t_list	*last;
 
@@ -25,7 +25,7 @@ void	ft_last_push(t_list **add, t_list **rem)
 	*rem = NULL;
 }
 
-void	ft_first_push(t_list **add, t_list **push)
+static void	ft_first_push(t_list **add, t_list **push)
 {
 	t_list	*last;
 
@@ -38,6 +38,21 @@ void	ft_first_push(t_list **add, t_list **push)
 	(*add)->next = *add;
 }
 
+static int	ft_check_push(t_list **analyze, t_list **other)
+{
+	if (!*analyze)
+	{
+		ft_first_push(analyze, other);
+		return (1);
+	}
+	if ((*other)->next == *other)
+	{
+		ft_last_push(analyze, other);
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_push_a(t_list **a, t_list **b)
 {
 	t_list	*second;
@@ -47,15 +62,8 @@ void	ft_push_a(t_list **a, t_list **b)
 	last = *b;
 	if (!*b)
 		return ;
-	if (!*a)
+	if (ft_check_push(a, b) == 1)
 	{
-		ft_first_push(a, b);
-		ft_printf("pa\n");
-		return ;
-	}
-	if ((*b)->next == *b)
-	{
-		ft_last_push(a, b);
 		ft_printf("pa\n");
 		return ;
 	}
@@ -80,15 +88,8 @@ void	ft_push_b(t_list **a, t_list **b)
 	last = *a;
 	if (!*a)
 		return ;
-	if (!*b)
+	if (ft_check_push(b, a) == 1)
 	{
-		ft_first_push(b, a);
-		ft_printf("pb\n");
-		return ;
-	}
-	if ((*a)->next == *a)
-	{
-		ft_last_push(b, a);
 		ft_printf("pb\n");
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:02 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/25 20:18:25 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:48:53 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	ft_upper_list(t_list **a, t_list **b, int p_small)
 	ft_push_b(a, b);
 }
 
-void ft_down_list(t_list **a, t_list **b, int p_small)
+void	ft_down_list(t_list **a, t_list **b, int p_small)
 {
 	int	max;
 
 	max = ft_count_list(*a);
-	while(p_small < max)
+	while (p_small < max)
 	{
 		ft_rev_rotate_a(a);
 		p_small++;
@@ -58,8 +58,9 @@ void	ft_end_list(t_list **a, t_list **b)
 			ft_swap_a(a);
 		else
 			check++;
-		if ((*a)->next->next != *a &&
-				*(int *)((*a)->next->content) > *(int *)((*a)->next->next->content))
+		if ((*a)->next->next != *a
+			&& *(int *)((*a)->next->content)
+			> *(int *)((*a)->next->next->content))
 			ft_rev_rotate_a(a);
 		else
 			check++;

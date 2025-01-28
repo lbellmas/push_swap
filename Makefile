@@ -6,11 +6,11 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/25 18:55:08 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/28 10:57:12 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME     = push_swap.a
+NAME     = push_swap
 AR       = ar
 ARFLAGS  = -rcs
 CC       = cc
@@ -32,9 +32,11 @@ PRINTF   = $(PRINTFDIR)/libftprintf.a
 MOVE     = ft_push.c ft_rev_rotate.c ft_rotate.c ft_swap.c
 SORTS    = ft_sorts.c ft_sorts_mid_top.c ft_sorts_mid_bot.c \
            ft_sorts_min_bot.c ft_sorts_min_top.c ft_sorts_max_top.c \
-           ft_sorts_max_bot.c ft_sorts_mis_min.c
-UTILS    = ft_base.c ft_numbers.c ft_push_error.c ft_status.c
-SRCS     = ft_analisis.c ft_move.c
+           ft_sorts_max_bot.c ft_sorts_mis_min.c ft_sorts_min_top2.c \
+			ft_sorts_extras.c ft_sorts_extras2.c
+UTILS    = ft_base.c ft_numbers.c ft_push_error.c ft_status.c ft_sorted.c \
+		   ft_utils.c ft_utils2.c
+SRCS     = ft_analisis.c ft_move.c ft_share.c ft_split.c ft_deals_correct.c
 
 OUTILS   = $(addprefix $(OUTILSDIR)/, $(UTILS:.c=.o))
 OSORTS   = $(addprefix $(OSORTSDIR)/, $(SORTS:.c=.o))
@@ -52,7 +54,6 @@ CYAN     = \033[0;36m
 RESET    = \033[m
 
 all: $(NAME)
-	$(CC) $(CFLAGS) -g $(MAIN) $(NAME) -o push_swap
 
 -include $(DEPS)
 
@@ -98,7 +99,7 @@ $(PRINTF):
 $(NAME): $(OBJS) $(PRINTF) $(OMOVE) $(OUTILS) $(OSORTS)
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@cp $(PRINTF) $(NAME)
-	@$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OMOVE) $(OSORTS) $(OUTILS)
+	@$(CC) $(CFLAGS) $(MAIN) $(OBJS) $(OMOVE) $(OSORTS) $(OUTILS) $(PRINTF) -o $(NAME)
 
 clean:
 	@printf "%b" "$(BLUE)Cleaning objects...$(RESET)\n"

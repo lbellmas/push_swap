@@ -6,12 +6,11 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:06:47 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/25 16:50:47 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:46:04 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/push_swap.h"
-
 
 void	del(void *content)
 {
@@ -39,9 +38,10 @@ void	ft_end_stack(t_list **lst, void (*del)(void*))
 
 int	main(int argc, char **argv)
 {
-	t_list *a;
-	t_list *b = NULL;
+	t_list	*a;
+	t_list	*b;
 
+	b = NULL;
 	if (argc < 2 || ft_error(argv) == -1)
 	{
 		write (2, "ERROR\n", 6);

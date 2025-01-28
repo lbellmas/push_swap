@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:51:53 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/20 16:24:48 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:26:03 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,69 +20,60 @@ t_list	*ft_prev_tlist(t_list *last, t_list *list)
 	return (list);
 }
 
-void ft_numbers(t_list *a, int size)
+void	ft_numbers(t_list *a, int size)
 {
-    t_list *head;
-    t_list *node;
-    int current_order;
-    int min_processed;
-	int		i;	
+	t_list	*head;
+	t_list	*node;
+	int		current_order;
+	int		min_processed;
+	int		i;
 
-	i = 0;
-    current_order = 1;
-    min_processed = -2147483648;
-    while (current_order <= size)
-    {
+	current_order = 0;
+	min_processed = -2147483648;
+	while (current_order++ < size)
+	{
 		i = 0;
-        head = a;
-        node = NULL;
-        while (head->next != head && i < size)
-        {
-            if ((*(int *)head->content > min_processed) && (!node || *(int *)head->content < *(int *)node->content))
-                node = head;
-            head = head->next;
-			i++;
-        }
-        if (node)
-        {
-            *(int *)node->content = current_order;
-            min_processed = *(int *)node->content;
-            current_order++;
-        }
-		else
+		head = a;
+		node = NULL;
+		while (head->next != head && i++ < size)
+		{
+			if ((*(int *)head->content > min_processed)
+				&& (!node || *(int *)head->content < *(int *)node->content))
+				node = head;
+			head = head->next;
+		}
+		if (!node)
 			break ;
-    }
-	//ft_status(a, NULL);
+		*(int *)node->content = current_order;
+		min_processed = *(int *)node->content;
+	}
 }
 
-void ft_rev_numbers(t_list *a, int size)
+void	ft_rev_numbers(t_list *a, int size)
 {
-    t_list *head;
-    t_list *node;
-    int current_order;
-    int min_processed;
+	t_list	*head;
+	t_list	*node;
+	int		current_order;
+	int		min_processed;
 	int		i;	
 
-	i = 0;
-    current_order = 1;
-    min_processed = -2147483648;
-    while (current_order <= size)
-    {
+	current_order = 0;
+	min_processed = -2147483648;
+	while (current_order++ < size)
+	{
 		i = 0;
-        head = ft_last_list(a);
-        node = NULL;
-        while (head->next != head && i < size)
-        {
-            if ((*(int *)head->content > min_processed) && (!node || *(int *)head->content < *(int *)node->content))
-                node = head;
-            head = ft_prev_tlist(head, a);
-			i++;
-        }
-        if (node)
-        {
-            *(int *)node->content = current_order;
-            min_processed = *(int *)node->content;
-            current_order++;
-        }
-    }
+		head = ft_last_list(a);
+		node = NULL;
+		while (head->next != head && i++ < size)
+		{
+			if ((*(int *)head->content > min_processed)
+				&& (!node || *(int *)head->content < *(int *)node->content))
+				node = head;
+			head = ft_prev_tlist(head, a);
+		}
+		if (!node)
+			break ;
+		*(int *)node->content = current_order;
+		min_processed = *(int *)node->content;
+	}
 }
