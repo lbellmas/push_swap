@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 14:17:48 by lbellmas          #+#    #+#              #
-#    Updated: 2024/12/02 11:31:52 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/29 12:42:49 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ ARFLAGS	=    -rcs
 CC		=    cc
 CFLAGS	=    -g -Wall -Wextra -Werror -MMD -MF $(@:.o=.d)
 
+LIB	=	header/ft_printf.h
 SRCDIR	= src
 DEPSDIR = deps
 OBJDIR	= objs
@@ -33,12 +34,12 @@ PURPLE      	= \033[0;35m
 CYAN        	= \033[0;36m
 RESET			= \033[m
 
-all: $(NAME) 
+all: $(NAME)
 
 -include $(DEPS)
 
 $(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.c | $(OBJDIR) $(DEPSDIR)
-	@printf "%-42b%b" "$(PURPLE)$(<):" "$(BLUE)$(@F)$(RESET)\n"
+	#@printf "%-42b%b" "$(PURPLE)$(<):" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@mv objs/*.d deps/
 
@@ -52,7 +53,7 @@ $(LIBFT):
 	@printf "%b" "$(BLUE)$(@F)$(RESET)\n"
 	@$(MAKE) --silent -C $(LIBFTDIR) bonus
 
-$(NAME): $(OBJS) $(LIBFT) 
+$(NAME): $(OBJS) $(LIBFT)
 	@printf "%-42b%b" "$(PURPLE)$(<):" "$(BLUE)$(@F)$(RESET)\n"
 	@cp $(LIBFT) $(NAME)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)

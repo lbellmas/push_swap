@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:57:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 16:52:59 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:57:24 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_recursive_chunk_sort(t_chunk *chunk,
 {
 	t_chunk	*new;
 
-	if (chunk->size_min < 5)
+	if (chunk->division < 13)
 	{
 		ft_small_sort(chunk, a, b, flag);
 		return ;

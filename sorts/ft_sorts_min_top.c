@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:33:18 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 14:51:45 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:32:40 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ static void	ft_min_is_top_extension(t_list **a, t_list **b)
 		ft_push_a(a, b);
 		ft_check_swap(a, b);
 		ft_push_a(a, b);
-		ft_check_swap(a, b);
+		ft_check_swap(a, NULL);
 		ft_push_a(a, b);
+		ft_check_swap(a, NULL);
 	}
 	else
 		ft_min_top_4(a, b);

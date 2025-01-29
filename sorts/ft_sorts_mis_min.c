@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:57:02 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 15:17:23 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:05:39 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,59 +28,6 @@ static void	ft_sort_mid_bottom_four(t_list **a, t_list **b, t_chunk *chunk)
 	if (chunk->size_min == 4)
 		ft_rev_rotate_b(b);
 }
-/*
-static void	ft_sort_bottom_three_mid_extension(t_list **a,
-				t_list **b, t_chunk *chunk)
-{
-	ft_rev_rotate_r(a, b);
-	ft_rev_rotate_r(a, b);
-	ft_push_b(a, b);
-	ft_rev_rotate_a(a);
-	ft_check_swap(a, b);
-	ft_push_a(a, b);
-	if (chunk->size_min == 3)
-	{
-		ft_rev_rotate_b(b);
-		ft_check_swap(a, b);
-	}
-	ft_check_swap(a, NULL);
-}
-
-static void	ft_sort_bottom_three_mid_extension2(t_list **a,
-				t_list **b, t_chunk *chunk)
-{
-	ft_rev_rotate_r(a, b);
-	ft_rev_rotate_r(a, b);
-	ft_check_swap(a, b);
-	if (chunk->size_min == 3)
-	{
-		ft_rev_rotate_r(a, b);
-		ft_check_swap(a, b);
-	}
-	else
-	{
-		ft_rev_rotate_a(a);
-		ft_check_swap(a, NULL);
-	}
-}
-
-static void	ft_sort_bottom_three_mid(t_list **a, t_list **b, t_chunk *chunk)
-{
-	if (*(int *)chunk->mid->content == 3)
-	{
-		ft_rev_rotate_r(a, b);
-		ft_rev_rotate_r(a, b);
-		if (chunk->size_min == 3)
-			ft_rev_rotate_r(a, b);
-		else
-			ft_rev_rotate_a(a);
-		ft_check_swap(a, b);
-	}
-	else if (ft_prev_list(chunk->mid, *a) == 3)
-		ft_sort_bottom_three_mid_extension2(a, b, chunk);
-	else
-		ft_sort_bottom_three_mid_extension(a, b, chunk);
-}*/
 
 static void	ft_sorted_mid_extension(t_list **a, t_list **b, t_chunk *chunk)
 {

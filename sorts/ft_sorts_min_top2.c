@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:56:18 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 14:58:36 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:26:18 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 void	ft_min_top_4_extension(t_list **a, t_list **b)
 {
 	ft_push_a(a, b);
-	ft_rev_rotate_b(b);
+	ft_rotate_b(b);
 	if (*(int *)(*b)->content == 4)
 		ft_push_a(a, b);
 	else
 	{
-		ft_rev_rotate_b(b);
+		ft_rotate_b(b);
 		ft_push_a(a, b);
+		ft_rev_rotate_b(b);
 	}
+	ft_rev_rotate_b(b);
 	ft_check_swap(a, b);
 	ft_push_a(a, b);
 	ft_check_swap(a, NULL);
