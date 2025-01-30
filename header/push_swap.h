@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:04:44 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:36 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:35:06 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_chunk
 	int				size_min;
 }	t_chunk;
 
+void	ft_status(t_list *a, t_list *b);
 t_list	*ft_setup(char **argv);
 void	del(void *content);
 void	ft_swap_a(t_list **a);

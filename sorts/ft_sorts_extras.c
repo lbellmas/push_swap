@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:14:49 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 15:32:21 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:45:49 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_sort_bottom_three_mid_extension(t_list **a,
 	ft_rev_rotate_r(a, b);
 	ft_push_b(a, b);
 	ft_rev_rotate_a(a);
-	ft_check_swap(a, b);
+	ft_check_swap(a, NULL);
 	ft_push_a(a, b);
 	if (chunk->size_min == 3)
 	{

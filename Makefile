@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/30 10:09:48 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/30 13:05:59 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ PURPLE   = \033[0;35m
 CYAN     = \033[0;36m
 RESET    = \033[m
 
-all: $(NAME) $(LIB) Makefile
+all: $(PRINTF) $(NAME) $(LIB) Makefile
 
 bonus: $(CHECKER) $(LIB) $(LIBCHECK) Makefile
 
@@ -77,7 +77,7 @@ $(OBJCHECK): $(BONUSDIR)/%.o : $(BONUSDIR)/%.c
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
 
-$(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.c | $(OBJDIR) $(DEPSDIR)
+$(OBJS): $(OBJDIR)/%.o : $(SRCDIR)/%.c Makefile | $(OBJDIR) $(DEPSDIR) 
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
 	@mv objs/*.d deps/
@@ -115,7 +115,7 @@ $(DEPSDIR):
 $(PRINTF):
 	@printf "%b" "$(BLUE)$(@F)$(RESET)\n"
 	@$(MAKE) --silent -C $(PRINTFDIR)
-$(NAME): $(OBJS) $(PRINTF) $(OMOVE) $(OUTILS) $(OSORTS)
+$(NAME): $(OBJS) $(OMOVE) $(OUTILS) $(OSORTS)
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(MAIN) $(PRINTF) $(OBJS) $(OMOVE) $(OSORTS) $(OUTILS) $(PRINTF) -o $(NAME)
 
