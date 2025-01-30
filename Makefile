@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/30 13:05:59 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/30 15:42:52 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,7 +115,7 @@ $(DEPSDIR):
 $(PRINTF):
 	@printf "%b" "$(BLUE)$(@F)$(RESET)\n"
 	@$(MAKE) --silent -C $(PRINTFDIR)
-$(NAME): $(OBJS) $(OMOVE) $(OUTILS) $(OSORTS)
+$(NAME): $(MAIN) $(OBJS) $(OMOVE) $(OUTILS) $(OSORTS)
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(MAIN) $(PRINTF) $(OBJS) $(OMOVE) $(OSORTS) $(OUTILS) $(PRINTF) -o $(NAME)
 

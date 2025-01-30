@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:57:40 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/30 11:15:23 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:26:52 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_moves_extension(char *mov, int size, t_list **a, t_list **b)
 	return (0);
 }
 
-void	ft_moves(t_list **a, t_list **b)
+int	ft_moves(t_list **a, t_list **b)
 {
 	char	*mov;
 
@@ -49,15 +49,16 @@ void	ft_moves(t_list **a, t_list **b)
 	while (mov)
 	{
 		if (ft_strlen(mov) < 2)
-			return ;
+			return (-2);
 		if (ft_moves_extension(mov, ft_strlen(mov), a, b) == -1)
 		{
 			free (mov);
-			return ;
+			return (-2);
 		}
 		mov = get_next_line(0);
 	}
 	free (mov);
+	return (0);
 }
 
 int	ft_check(t_list **a, t_list **b)

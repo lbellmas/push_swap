@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:41:52 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 11:02:36 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:32:17 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ t_list	*ft_setup(char **argv)
 	temp = NULL;
 	ft_lstdelone(temp, del);
 	return (dest);
+}
+
+t_list	*ft_prev_tlist(t_list *last, t_list *list)
+{
+	while (list->next != last)
+		list = list->next;
+	return (list);
 }

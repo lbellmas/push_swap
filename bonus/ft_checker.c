@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:55:19 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/29 13:50:09 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:27:44 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	a = ft_setup(argv);
-	ft_moves(&a, &b);
-	check = ft_check(&a, &b);
+	check = ft_moves(&a, &b);
+	if (check == 0)
+		check = ft_check(&a, &b);
 	ft_end_stack(&a, del);
 	ft_end_stack(&b, del);
-	if (check == -1)
+	if (check == -2)
+		ft_printf("Error");
+	else if(check == -1)
 		ft_printf("KO");
 	else
 		ft_printf("OK");
