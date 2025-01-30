@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/29 16:06:16 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/01/30 10:09:48 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ OSORTS   = $(addprefix $(OSORTSDIR)/, $(SORTS:.c=.o))
 OMOVE    = $(addprefix $(OMOVEDIR)/, $(MOVE:.c=.o))
 OBJS     = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 DEPS     = $(addprefix $(DEPSDIR)/, $(SRCS:.c=.d) $(MOVE:.c=.d) $(SORTS:.c=.d) $(UTILS:.c=.d))
+BONUSDEPS	= $(addprefix $(BONUSDIR)/, $(BONUSSRC:.c=.d))
 MAIN     = ft_push_swap.c
 
 RED      = \033[0;31m
@@ -126,6 +127,7 @@ clean:
 	@rm -rf $(OSORTSDIR)
 	@rm -rf $(OUTILSDIR)
 	@rm -rf $(OBJCHECK)
+	@rm -rf $(BONUSDEPS)
 	@$(MAKE) -C $(PRINTFDIR) clean --silent
 
 fclean: clean

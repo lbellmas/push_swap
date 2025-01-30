@@ -1,6 +1,7 @@
 #!/bin/bash
+
 if [ "$#" -ne 2 ]; then
-    echo "Uso: sh $0 <rango> <movimientos>"
+    echo "Uso: $0 <rango> <movimientos>"
     exit 1
 fi
 
@@ -8,6 +9,8 @@ RANGO=$1
 UMBRAL=$2
 SUMA=0
 INTENTOS=0
+MINMOVES=0
+MAXMOVES=0
 
 while true; do
     rm -f test.txt checker.txt
@@ -16,15 +19,27 @@ while true; do
     ./push_swap $ARG | ./checker $ARG > checker.txt
 
     VAR=$(wc -l < test.txt)
+
+    if [ "$MINMOVES" -eq 0 ] || [ "$VAR" -lt "$MINMOVES" ]; then
+        MINMOVES=$VAR
+    fi
+    if [ "$MAXMOVES" -eq 0 ] || [ "$VAR" -gt "$MAXMOVES" ]; then
+        MAXMOVES=$VAR
+    fi
+
     SUMA=$((SUMA + VAR))
     INTENTOS=$((INTENTOS + 1))
-
     PROMEDIO=$((SUMA / INTENTOS))
+
     ULTIMA_LINEA=$(tail -n 1 checker.txt)
+
     if [ "$VAR" -lt "$UMBRAL" ] && [ "$ULTIMA_LINEA" = "OK" ]; then
-        echo "\033[42m [OK] $VAR (Promedio: $PROMEDIO)\033[0m"  # Fondo verde
+        echo -e "\033[42m [OK] $VAR (Promedio: $PROMEDIO)(MAX: $MAXMOVES MIN: $MINMOVES)\033[0m"  # Fondo verde
+    elif [ "$ULTIMA_LINEA" = "OK" ]; then
+        echo -e "\033[41m [KO] $VAR (Promedio: $PROMEDIO)\033[0m $ARG"  # Fondo rojo
+		break
     else
-        echo "\033[41m [KO] $VAR (Promedio: $PROMEDIO)\033[0m $ARG"  # Fondo rojo
+        echo -e "\033[41m [KO] BAD SORT\033[0m $ARG"  # Fondo rojo
         break
     fi
 done
