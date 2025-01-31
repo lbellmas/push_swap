@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:18:02 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 15:48:53 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:00:05 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,20 @@ void	ft_push_all(t_list **a, t_list **b)
 void	ft_end_list(t_list **a, t_list **b)
 {
 	int	check;
-	int	smallest;
 
 	check = 0;
+	ft_numbers(*a, 3);
 	while (check != 2)
 	{
-		check = 0;
-		smallest = ft_find_small(*a);
-		if (smallest == 3)
-			ft_rev_rotate_a(a);
-		else if (smallest == 2)
+		if (*(int *)(*a)->content == 3)
+			ft_rotate_a(a);
+		else if (*(int *)(*a)->content == 2 && *(int *)(*a)->next->content == 1)
 			ft_swap_a(a);
-		else
-			check++;
-		if ((*a)->next->next != *a
-			&& *(int *)((*a)->next->content)
-			> *(int *)((*a)->next->next->content))
+		else if (*(int *)(*a)->content == 2)
 			ft_rev_rotate_a(a);
-		else
-			check++;
+		else if (*(int *)(*a)->content == 1 && *(int *)(*a)->next->content == 3)
+			ft_rev_rotate_a(a);
+		check++;
 	}
 	ft_push_all(a, b);
 }

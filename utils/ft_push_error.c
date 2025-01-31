@@ -6,11 +6,12 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:37:41 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/28 11:36:19 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:37:48 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/push_swap.h"
+#include <limits.h>
 
 int	ft_error(char **args)
 {
@@ -25,7 +26,8 @@ int	ft_error(char **args)
 			return (-1);
 		while (args[c])
 		{
-			if (c != p && ft_atoi(args[p]) == ft_atoi(args[c]))
+			if ((c != p && ft_atoi(args[p]) == ft_atoi(args[c]))
+				|| (ft_atol(args[c]) > INT_MAX || ft_atol(args[c]) < INT_MIN))
 				return (-1);
 			c++;
 		}
