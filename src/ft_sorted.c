@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:56 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/27 15:31:09 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:56:02 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_is_sorted(t_list *list, int size)
 	t_list	*prev;
 
 	p = 0;
-	if (ft_count_list(list) < 3)
+	if (ft_count_list(list) < 2)
 		return (0);
 	temp = list->next;
 	prev = list;

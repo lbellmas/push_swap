@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:55:19 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/30 16:27:44 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:36:54 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int argc, char **argv)
 		ft_printf("ERROR");
 		return (0);
 	}
+	if (argc == 2)
+		return (0);
 	a = ft_setup(argv);
 	check = ft_moves(&a, &b);
 	if (check == 0)
@@ -57,7 +59,7 @@ int	main(int argc, char **argv)
 	ft_end_stack(&b, del);
 	if (check == -2)
 		ft_printf("Error");
-	else if(check == -1)
+	else if (check == -1)
 		ft_printf("KO");
 	else
 		ft_printf("OK");

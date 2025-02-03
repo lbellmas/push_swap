@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:41:52 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/31 12:33:39 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:03:16 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_list	*ft_prev_tlist(t_list *last, t_list *list)
 
 long	ft_atol(const char *nptr)
 {
-	int	p;
-	int	sign;
+	int		p;
+	int		sign;
 	long	num;
 
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:57:40 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/30 16:26:52 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:38:53 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ int	ft_check(t_list **a, t_list **b)
 	t_list	*temp;
 	t_list	*prev;
 
+	if (!*a || (*a)->next == *a)
+		return (-1);
 	prev = *a;
 	temp = (*a)->next;
-	if (*b)
+	if (b && *b)
 		return (-1);
 	while (temp != *a)
 	{

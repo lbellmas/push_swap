@@ -6,7 +6,7 @@
 /*   By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:49:24 by lbellmas          #+#    #+#             */
-/*   Updated: 2025/01/30 16:23:14 by lbellmas         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:03:31 by lbellmas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../printf/libft/libft.h"
 # include "get_next_line_bonus.h"
 
-int	ft_moves(t_list **a, t_list **b);
+int		ft_moves(t_list **a, t_list **b);
 int		ft_check(t_list **a, t_list **b);
 void	ft_push_a2(t_list **a, t_list **b);
 void	ft_push_b2(t_list **a, t_list **b);

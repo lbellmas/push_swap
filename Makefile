@@ -6,7 +6,7 @@
 #    By: lbellmas <lbellmas@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:59:02 by lbellmas          #+#    #+#              #
-#    Updated: 2025/01/30 15:42:52 by lbellmas         ###   ########.fr        #
+#    Updated: 2025/02/03 11:53:26 by lbellmas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SORTS    = ft_sorts.c ft_sorts_mid_top.c ft_sorts_mid_bot.c \
            ft_sorts_min_bot.c ft_sorts_min_top.c ft_sorts_max_top.c \
            ft_sorts_max_bot.c ft_sorts_mis_min.c ft_sorts_min_top2.c \
 			ft_sorts_extras.c ft_sorts_extras2.c
-UTILS    = ft_base.c ft_numbers.c ft_push_error.c ft_status.c \
+UTILS    = ft_base.c ft_numbers.c ft_push_error.c ft_status.c\
 		   ft_utils.c
 SRCS     = ft_analisis.c ft_move.c ft_share.c ft_split.c ft_deals_correct.c \
 			ft_utils2.c ft_sorted.c
@@ -65,11 +65,11 @@ RESET    = \033[m
 
 all: $(PRINTF) $(NAME) $(LIB) Makefile
 
-bonus: $(CHECKER) $(LIB) $(LIBCHECK) Makefile
+bonus: $(PRINTF) $(CHECKER) $(LIB) $(LIBCHECK) Makefile
 
 -include $(DEPS)
 
-$(CHECKER): $(PRINTF) $(OUTILS) $(OBJCHECK)
+$(CHECKER): $(OUTILS) $(OBJCHECK)
 	@printf "%-42b%b" "$(PURPLE)$<:" "$(BLUE)$(@F)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(PRINTF) $(OBJCHECK) $(OUTILS) $(PRINTF) -o $(CHECKER)
 
